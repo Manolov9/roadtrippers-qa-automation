@@ -1,14 +1,16 @@
 {
   "name": "roadtrippers-automation",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "description": "Automated QA suite for Roadtrippers trip planning flow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "show-report": "npx playwright show-report"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["playwright", "qa", "automation", "roadtrippers"],
+  "author": "QA Engineer",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",

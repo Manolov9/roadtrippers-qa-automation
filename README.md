@@ -1,56 +1,57 @@
-# Roadtrippers Automation Technical Assessment
+# Roadtrippers QA Automation Suite
 
-This repository contains the automated test suite and CI/CD strategy for the Roadtrippers trip planning feature, as part of the Automation QA Engineer technical assessment.
+This repository contains an automated testing suite for the [Roadtrippers](https://roadtrippers.com) trip planning flow using Playwright and TypeScript.
 
 ## Project Structure
 
-- `part1-automation/`: Playwright TypeScript test suite using Page Object Model.
-- `part2-ci-strategy/`: Strategy document for CircleCI integration.
-- `part3-bonus/`: Extensions and additional recommendations.
-- `.circleci/`: Sample configuration for continuous integration.
+- `tests/`: Contains the test specification files.
+- `pages/`: Page Object Model (POM) classes representing the website's pages.
+- `evidence/`: Stores video recordings of successful test runs.
+- `playwright.config.ts`: Configuration for Playwright, including browser settings and video recording.
 
-## Setup Instructions
+## Features
 
-1. **Prerequisites:**
-   - Node.js (v18 or higher)
-   - npm
+- **Happy Path Testing**: Verifies the creation of a trip to Sofia, Bulgaria.
+- **Edge Case Testing**: Handles scenarios with identical origin and destination.
+- **Negative Testing**: Ensures proper validation when required fields are missing.
+- **Conditional Evidence**: Video recordings are automatically saved only for **passed** tests. Failed test videos are discarded to save space and focus on valid evidence.
+- **Page Object Model**: Clean separation of concerns between test logic and UI locators.
 
-2. **Install Dependencies:**
+## Prerequisites
+
+- Node.js (v16 or higher)
+- npm
+
+## Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Manolov9/roadtrippers-qa-automation.git
+   cd roadtrippers-qa-automation
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. **Install Playwright Browsers:**
+3. Install Playwright browsers:
    ```bash
    npx playwright install chromium
    ```
 
-## Execution Instructions
+## Running Tests
 
-- **Run all tests:**
-  ```bash
-  npx playwright test
-  ```
+To run all tests in headless mode:
+```bash
+npm test
+```
 
-- **Run tests in headed mode:**
-  ```bash
-  npx playwright test --headed
-  ```
+To run tests and view the report:
+```bash
+npm test && npm run show-report
+```
 
-- **View Test Report:**
-  ```bash
-  npx playwright show-report
-  ```
+## Evidence
 
-## Trade-offs and Decisions
-
-- **Framework Choice:** Playwright was chosen for its superior speed, built-in auto-waiting, and excellent developer experience. It is the modern standard for web automation.
-- **Wait Strategy:** Used Playwright's native assertions (e.g., `expect(page).toHaveURL()`) and locator-based actions which handle waiting automatically, avoiding brittle `sleep()` calls.
-- **Scenario Selection:** Focused on the core value proposition (creating a trip) while including a common edge case (same start/end) and a negative scenario (missing input).
-- **Time Spent:** Approximately 4 hours.
-
-## Deliverables
-- [x] Automated test implementation (TypeScript + Playwright)
-- [x] Page Object Model structure
-- [x] CI/CD Strategy & CircleCI config
-- [x] Documentation and Trade-offs
+Successful test runs will generate video files in the `evidence/` directory. These files are named after the test case for easy identification.
