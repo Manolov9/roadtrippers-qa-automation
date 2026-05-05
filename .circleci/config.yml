@@ -1,0 +1,29 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+
+jobs:
+  test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.43.0-jammy
+    parallelism: 2
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run Playwright Tests
+          command: npx playwright test --shard=$CIRCLE_NODE_INDEX/$CIRCLE_NODE_TOTAL
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: playwright-report
+          destination: playwright-report
+      - store_artifacts:
+          path: evidence
+          destination: evidence
+
+workflows:
+  test-workflow:
+    jobs:
+      - test

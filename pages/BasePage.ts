@@ -17,12 +17,15 @@ export class BasePage {
       await acceptBtn.waitFor({ state: 'visible', timeout: 5000 });
       await acceptBtn.click({ force: true });
     } catch (e) {
-      console.log('Cookie banner not found or already dismissed');
+      // Check for other cookie button IDs if needed
+      const altAcceptBtn = this.page.locator('button:has-text("Accept")');
+      if (await altAcceptBtn.isVisible()) {
+        await altAcceptBtn.click();
+      }
     }
   }
 
   async removeOverlays() {
-    // Wait a bit for overlays to appear
     await this.page.waitForTimeout(2000);
     await this.page.evaluate(() => {
       const selectors = [
@@ -31,7 +34,8 @@ export class BasePage {
         '.onetrust-pc-dark-filter', 
         '#onetrust-banner-sdk',
         '.gist-message',
-        '.gist-background'
+        '.gist-background',
+        '.modal-backdrop'
       ];
       selectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
