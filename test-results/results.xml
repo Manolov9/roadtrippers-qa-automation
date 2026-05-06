@@ -1,127 +1,28 @@
-<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="150.621364">
-<testsuite name="trip-planning.spec.ts" timestamp="2026-05-05T21:58:07.391Z" hostname="chromium" tests="4" failures="3" skipped="0" time="422.036" errors="0">
-<testcase name="Roadtrippers Trip Planning Flow › Happy Path: Create a new trip from New York to Sofia, Bulgaria" classname="trip-planning.spec.ts" time="130.918">
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="153.391058">
+<testsuite name="api-trips.spec.ts" timestamp="2026-05-06T00:10:23.373Z" hostname="chromium" tests="3" failures="0" skipped="0" time="2.925" errors="0">
+<testcase name="Roadtrippers API - Trip Management › POST /api/v2/trips - Create a new trip" classname="api-trips.spec.ts" time="1.67">
+</testcase>
+<testcase name="Roadtrippers API - Trip Management › GET /api/v2/trips/{id} - Retrieve trip data" classname="api-trips.spec.ts" time="0.829">
+</testcase>
+<testcase name="Roadtrippers API - Trip Management › POST /api/v2/trips - Error on empty body" classname="api-trips.spec.ts" time="0.426">
+</testcase>
+</testsuite>
+<testsuite name="trip-planning.spec.ts" timestamp="2026-05-06T00:10:23.373Z" hostname="chromium" tests="3" failures="0" skipped="0" time="149.242" errors="0">
+<testcase name="Roadtrippers Trip Planning Flow › Happy Path: Create a new trip" classname="trip-planning.spec.ts" time="50.929">
+</testcase>
+<testcase name="Roadtrippers Trip Planning Flow › Edge Case: Same origin and destination" classname="trip-planning.spec.ts" time="52.807">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/test-failed-1.png]]
-
-[[ATTACHMENT|trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/error-context.md]]
-]]>
-</system-out>
-<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
-<![CDATA[  [chromium] › trip-planning.spec.ts:52:7 › Roadtrippers Trip Planning Flow › Happy Path: Create a new trip from New York to Sofia, Bulgaria 
-
-    Error: expect(page).toHaveURL(expected) failed
-
-    Expected pattern: /trip_id=|onboarding|itinerary/
-    Received string:  "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-    Timeout: 60000ms
-
-    Call log:
-      - Expect "toHaveURL" with timeout 60000ms
-        63 × unexpected value "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-
-
-      56 |     await tripPlannerPage.clickCreateTrip();
-      57 |
-    > 58 |     await expect(page).toHaveURL(/trip_id=|onboarding|itinerary/, { timeout: 60000 });
-         |                        ^
-      59 |   });
-      60 |
-      61 |   test('Edge Case: Create a trip with same origin and destination (Sofia)', async ({ page }) => {
-        at /home/ubuntu/roadtrippers-qa-automation/tests/trip-planning.spec.ts:58:24
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ../test-results/trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/error-context.md
-]]>
-</failure>
-</testcase>
-<testcase name="Roadtrippers Trip Planning Flow › Edge Case: Create a trip with same origin and destination (Sofia)" classname="trip-planning.spec.ts" time="141.86">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/test-failed-1.png]]
-
-[[ATTACHMENT|trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/error-context.md]]
-]]>
-</system-out>
-<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
-<![CDATA[  [chromium] › trip-planning.spec.ts:61:7 › Roadtrippers Trip Planning Flow › Edge Case: Create a trip with same origin and destination (Sofia) 
-
-    Error: expect(page).toHaveURL(expected) failed
-
-    Expected pattern: /trip_id=|onboarding|itinerary/
-    Received string:  "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-    Timeout: 60000ms
-
-    Call log:
-      - Expect "toHaveURL" with timeout 60000ms
-        63 × unexpected value "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-
-
-      65 |     await tripPlannerPage.clickCreateTrip();
-      66 |
-    > 67 |     await expect(page).toHaveURL(/trip_id=|onboarding|itinerary/, { timeout: 60000 });
-         |                        ^
-      68 |   });
-      69 |
-      70 |   test('Negative Scenario: Attempt to create trip with missing destination', async ({ page }) => {
-        at /home/ubuntu/roadtrippers-qa-automation/tests/trip-planning.spec.ts:67:24
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ../test-results/trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/error-context.md
-]]>
-</failure>
-</testcase>
-<testcase name="Roadtrippers Trip Planning Flow › Negative Scenario: Attempt to create trip with missing destination" classname="trip-planning.spec.ts" time="57.518">
-<system-out>
-<![CDATA[Video saved to: /home/ubuntu/roadtrippers-qa-automation/evidence/2026-05-05/negative_scenario__attempt_to_create_trip_with_missing_destination_1778018345518.mp4
+[[ATTACHMENT|trip-planning-Roadtrippers-5ef2a-Same-origin-and-destination-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="Roadtrippers Trip Planning Flow › Functional Case: Add waypoints to a trip" classname="trip-planning.spec.ts" time="91.74">
+<testcase name="Roadtrippers Trip Planning Flow › Negative Scenario: Missing destination" classname="trip-planning.spec.ts" time="45.506">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|trip-planning-Roadtrippers-6aaa1-ase-Add-waypoints-to-a-trip-chromium/test-failed-1.png]]
-
-[[ATTACHMENT|trip-planning-Roadtrippers-6aaa1-ase-Add-waypoints-to-a-trip-chromium/error-context.md]]
+[[ATTACHMENT|trip-planning-Roadtrippers-47594-cenario-Missing-destination-chromium/video.webm]]
 ]]>
 </system-out>
-<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
-<![CDATA[  [chromium] › trip-planning.spec.ts:82:7 › Roadtrippers Trip Planning Flow › Functional Case: Add waypoints to a trip 
-
-    Error: expect(page).toHaveURL(expected) failed
-
-    Expected pattern: /trip_id=|onboarding|itinerary/
-    Received string:  "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-    Timeout: 60000ms
-
-    Call log:
-      - Expect "toHaveURL" with timeout 60000ms
-        63 × unexpected value "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"
-
-
-      86 |     await tripPlannerPage.clickCreateTrip();
-      87 |     
-    > 88 |     await expect(page).toHaveURL(/trip_id=|onboarding|itinerary/, { timeout: 60000 });
-         |                        ^
-      89 |   });
-      90 | });
-      91 |
-        at /home/ubuntu/roadtrippers-qa-automation/tests/trip-planning.spec.ts:88:24
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/trip-planning-Roadtrippers-6aaa1-ase-Add-waypoints-to-a-trip-chromium/test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ../test-results/trip-planning-Roadtrippers-6aaa1-ase-Add-waypoints-to-a-trip-chromium/error-context.md
-]]>
-</failure>
 </testcase>
 </testsuite>
 </testsuites>

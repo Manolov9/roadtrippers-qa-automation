@@ -1,0 +1,116 @@
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › tests/api-trips.spec.ts:6:7 › Roadtrippers API - Trip Management › POST /api/v2/trips - Create a new trip
+[1A[2K[2/6] [chromium] › tests/api-trips.spec.ts:23:7 › Roadtrippers API - Trip Management › GET /api/v2/trips/{id}/waypoints - Retrieve trip data
+[1A[2K  1) [chromium] › tests/api-trips.spec.ts:23:7 › Roadtrippers API - Trip Management › GET /api/v2/trips/{id}/waypoints - Retrieve trip data 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m200[39m
+    Received: [31m404[39m
+
+      32 |     const response = await request.get(`/api/v2/trips/${tripId}/waypoints`);
+      33 |     
+    > 34 |     expect(response.status()).toBe(200);
+         |                               ^
+      35 |     const body = await response.json();
+      36 |     expect(body.trip.id).toBe(tripId);
+      37 |     expect(body.trip.name).toBe('Fetch Test');
+        at /home/ubuntu/roadtrippers-qa-automation/tests/api-trips.spec.ts:34:31
+
+    Error Context: test-results/api-trips-Roadtrippers-API-dfc7c-points---Retrieve-trip-data-chromium/error-context.md
+
+
+[1A[2K[3/6] [chromium] › tests/api-trips.spec.ts:41:7 › Roadtrippers API - Trip Management › POST /api/v2/trips - Error on missing trip parameter
+[1A[2K  2) [chromium] › tests/api-trips.spec.ts:41:7 › Roadtrippers API - Trip Management › POST /api/v2/trips - Error on missing trip parameter 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m400[39m
+    Received: [31m201[39m
+
+      48 |     
+      49 |     // The API returns 400 when the 'trip' parameter is missing
+    > 50 |     expect(response.status()).toBe(400);
+         |                               ^
+      51 |     const body = await response.json();
+      52 |     expect(body.errors[0].message).toContain('param is missing');
+      53 |   });
+        at /home/ubuntu/roadtrippers-qa-automation/tests/api-trips.spec.ts:50:31
+
+    Error Context: test-results/api-trips-Roadtrippers-API-4d0cc-r-on-missing-trip-parameter-chromium/error-context.md
+
+
+[1A[2K[4/6] [chromium] › tests/trip-planning.spec.ts:53:7 › Roadtrippers Trip Planning Flow › Happy Path: Create a new trip from New York to Sofia, Bulgaria
+[1A[2K  3) [chromium] › tests/trip-planning.spec.ts:53:7 › Roadtrippers Trip Planning Flow › Happy Path: Create a new trip from New York to Sofia, Bulgaria 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/trip_id=|onboarding|itinerary/[39m
+    Received string:  [31m"https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"[39m
+    Timeout: 60000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 60000ms[22m
+    [2m    63 × unexpected value "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"[22m
+
+
+      61 |     await tripPlannerPage.clickCreateTrip();
+      62 |
+    > 63 |     await expect(page).toHaveURL(/trip_id=|onboarding|itinerary/, { timeout: 60000 });
+         |                        ^
+      64 |   });
+      65 |
+      66 |   // TC-UI-02: Edge Case - same origin and destination
+        at /home/ubuntu/roadtrippers-qa-automation/tests/trip-planning.spec.ts:63:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/trip-planning-Roadtrippers-9f5b4--New-York-to-Sofia-Bulgaria-chromium/error-context.md
+
+
+[1A[2K[5/6] [chromium] › tests/trip-planning.spec.ts:67:7 › Roadtrippers Trip Planning Flow › Edge Case: Create a trip with same origin and destination (Sofia)
+[1A[2K  4) [chromium] › tests/trip-planning.spec.ts:67:7 › Roadtrippers Trip Planning Flow › Edge Case: Create a trip with same origin and destination (Sofia) 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/trip_id=|onboarding|itinerary/[39m
+    Received string:  [31m"https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"[39m
+    Timeout: 60000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 60000ms[22m
+    [2m    63 × unexpected value "https://maps.roadtrippers.com/?lng=-98.35&lat=39.5&z=3.30945"[22m
+
+
+      75 |
+      76 |     // Same-location trips are allowed by the app
+    > 77 |     await expect(page).toHaveURL(/trip_id=|onboarding|itinerary/, { timeout: 60000 });
+         |                        ^
+      78 |   });
+      79 |
+      80 |   // TC-UI-03: Negative Scenario - attempt to create trip with no destination
+        at /home/ubuntu/roadtrippers-qa-automation/tests/trip-planning.spec.ts:77:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/trip-planning-Roadtrippers-bab25-igin-and-destination-Sofia--chromium/error-context.md
+
+
+[1A[2K[6/6] [chromium] › tests/trip-planning.spec.ts:81:7 › Roadtrippers Trip Planning Flow › Negative Scenario: Attempt to create trip with missing destination
+[1A[2K[chromium] › tests/trip-planning.spec.ts:81:7 › Roadtrippers Trip Planning Flow › Negative Scenario: Attempt to create trip with missing destination
+Video saved to: /home/ubuntu/roadtrippers-qa-automation/evidence/2026-05-05/negative_scenario__attempt_to_create_trip_with_missing_destination_1778023679546.mp4
+
+[1A[2K  4 failed
+    [chromium] › tests/api-trips.spec.ts:23:7 › Roadtrippers API - Trip Management › GET /api/v2/trips/{id}/waypoints - Retrieve trip data 
+    [chromium] › tests/api-trips.spec.ts:41:7 › Roadtrippers API - Trip Management › POST /api/v2/trips - Error on missing trip parameter 
+    [chromium] › tests/trip-planning.spec.ts:53:7 › Roadtrippers Trip Planning Flow › Happy Path: Create a new trip from New York to Sofia, Bulgaria 
+    [chromium] › tests/trip-planning.spec.ts:67:7 › Roadtrippers Trip Planning Flow › Edge Case: Create a trip with same origin and destination (Sofia) 
+  2 passed (4.4m)
+
+[36m  Serving HTML report at http://localhost:38429. Press Ctrl+C to quit.[39m
