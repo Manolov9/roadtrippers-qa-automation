@@ -2,19 +2,17 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
+  fullyParallel: false, // Run sequentially for more stable recording
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: [['html'], ['junit', { outputFile: 'test-results/results.xml' }]],
+  retries: 0,
+  workers: 1,
+  outputDir: 'test-results', // All results in one place
+  reporter: [['list'], ['html', { outputFolder: 'test-results/html-report' }]],
   use: {
     baseURL: 'https://maps.roadtrippers.com',
-    trace: 'on-first-retry',
-    video: {
-      mode: 'on',
-      dir: 'temp-videos/',
-    },
-    screenshot: 'only-on-failure',
+    trace: 'off',
+    video: 'on', // Record video for all tests
+    screenshot: 'on',
   },
   projects: [
     {

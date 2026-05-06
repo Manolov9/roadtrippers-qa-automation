@@ -15,6 +15,7 @@ test.describe('Roadtrippers Trip Planning Flow', () => {
     await homePage.removeOverlays();
   });
 
+  // TC-UI-01: Happy Path - create a trip with valid origin and destination
   test('Happy Path: Create a new trip', async ({ page }) => {
     await homePage.clickStartTrip();
     await expect(tripPlannerPage.originInput).toBeVisible();
@@ -27,6 +28,7 @@ test.describe('Roadtrippers Trip Planning Flow', () => {
     await expect(page).toHaveURL(/trip_id=|itinerary|onboarding|maps/, { timeout: 60000 });
   });
 
+  // TC-UI-02: Edge Case - same origin and destination
   test('Edge Case: Same origin and destination', async ({ page }) => {
     await homePage.clickStartTrip();
     await tripPlannerPage.setOrigin('Sofia, Bulgaria');
@@ -36,6 +38,7 @@ test.describe('Roadtrippers Trip Planning Flow', () => {
     await expect(page).toHaveURL(/trip_id=|itinerary|onboarding|maps/, { timeout: 60000 });
   });
 
+  // TC-UI-03: Negative Scenario - attempt to create trip with no destination
   test('Negative Scenario: Missing destination', async ({ page }) => {
     await homePage.clickStartTrip();
     await tripPlannerPage.setOrigin('Sofia, Bulgaria');
