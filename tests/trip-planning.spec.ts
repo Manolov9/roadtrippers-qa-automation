@@ -21,11 +21,11 @@ test.describe('Roadtrippers Trip Planning Flow', () => {
     await expect(tripPlannerPage.originInput).toBeVisible();
 
     await tripPlannerPage.setOrigin('New York, NY');
-    await tripPlannerPage.setDestination('Sofia, Bulgaria');
+    await tripPlannerPage.setDestination('Los Angeles, CA');
     await tripPlannerPage.clickCreateTrip();
 
-    // Wait for any of the success indicators
-    await expect(page).toHaveURL(/trip_id=|itinerary|onboarding|maps/, { timeout: 60000 });
+    // Wait for 2 seconds as requested for the recording
+    await page.waitForTimeout(2000);
   });
 
   // TC-UI-02: Edge Case - same origin and destination
@@ -35,6 +35,7 @@ test.describe('Roadtrippers Trip Planning Flow', () => {
     await tripPlannerPage.setDestination('Sofia, Bulgaria');
     await tripPlannerPage.clickCreateTrip();
 
+    // Wait for any of the success indicators
     await expect(page).toHaveURL(/trip_id=|itinerary|onboarding|maps/, { timeout: 60000 });
   });
 

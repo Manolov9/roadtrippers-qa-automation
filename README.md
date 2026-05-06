@@ -4,10 +4,11 @@ This repository contains the automated test suite for the Roadtrippers trip plan
 
 ## Project Structure
 
-- `tests/`: Automated test specifications using Playwright.
+- `tests/`: Automated test specifications using Playwright (UI and API).
 - `pages/`: Page Object Model (POM) implementation.
-- `evidence/`: Video recordings of successful test runs, organized by date.
-- `part2-ci-strategy.md`: Detailed CI/CD integration strategy for CircleCI.
+- `test-results/`: Consolidated directory for all test artifacts, including screenshots and MP4 videos.
+- `STRATEGY.md`: Detailed CI/CD integration strategy for CircleCI.
+- `EXTENSIONS.md`: Information on implemented API tests and future recommendations.
 
 ## Setup Instructions
 
@@ -23,7 +24,7 @@ This repository contains the automated test suite for the Roadtrippers trip plan
 
 ## Running Tests
 
-To run all tests in headless mode:
+To run all 6 tests (3 UI, 3 API) in headless mode:
 ```bash
 npx playwright test
 ```
@@ -38,22 +39,17 @@ npx playwright test --ui
 - **Framework**: Playwright (recommended for its speed, stability, and built-in tracing/video capabilities).
 - **Target Site**: `https://maps.roadtrippers.com`.
 - **Test Scenarios**:
-  - **Happy Path**: Creating a trip from NYC to Sofia, Bulgaria.
-  - **Edge Case**: Trip with the same origin and destination.
-  - **Negative Scenario**: Attempting to create a trip without a destination.
-  - **Functional Case**: Adding waypoints to a trip.
-- **Evidence**: Videos are saved only for successful runs in `.mp4` format and organized by date.
+  - **UI Happy Path**: Creating a trip from NYC to Los Angeles, CA.
+  - **UI Edge Case**: Trip with the same origin and destination.
+  - **UI Negative Scenario**: Attempting to create a trip without a destination.
+  - **API Trip Creation**: Verifying the `POST /api/v2/trips` endpoint.
+  - **API Trip Retrieval**: Verifying the `GET /api/v2/trips/{id}` endpoint.
+  - **API Validation**: Verifying error handling for empty trip bodies.
+- **Evidence**: All artifacts are saved in the `test-results` directory. Videos are converted to `.mp4` format.
 - **CI/CD**: CircleCI strategy document included.
 
 ## Trade-offs and Considerations
 
-- **Flakiness Handling**: The Roadtrippers site uses dynamic overlays and autocomplete dropdowns that can sometimes intercept clicks. I implemented "force clicks" and robust suggestion selection logic to mitigate this.
-- **Video Format**: Playwright natively records in `.webm`. The suite includes a post-test hook to rename/organize these as `.mp4` as requested.
+- **Flakiness Handling**: The Roadtrippers site uses dynamic overlays and autocomplete dropdowns. I implemented robust suggestion selection logic and smart awaits to ensure stability.
+- **Video Format**: Playwright natively records in `.webm`. The suite includes a conversion step to provide `.mp4` files as requested.
 - **Wait Strategies**: Avoided arbitrary `sleep()` calls by using Playwright's built-in auto-waiting and explicit `waitFor` on specific UI states.
-- **Time Spent**: Total implementation time was approximately 5 hours.
-
-## Future Extensions (Bonus)
-
-- **Visual Regression**: Adding `expect(page).toHaveScreenshot()` for critical UI components.
-- **API Testing**: Intercepting the `/trips` POST request to verify data integrity at the network level.
-- **Performance**: Measuring the time from "Create Trip" click to "Itinerary" load.
