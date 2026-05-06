@@ -1,7 +1,7 @@
 # Roadtrippers QA Automation Project
 
-This repository contains the automated test suite for the Roadtrippers trip planning feature, developed as part of a Technical Assessment.
-
+This repository contains the automated test suite for the Roadtrippers trip planning feature, developed as part of a Technical Assessment. It also includes the parties:  part1-automation, part2-ci-strategy,
+part3-bonus(API) as a part of the smartly way and user guidline. The code and directories' naming from the repository use the classic design for OOP best-practice principe.
 ## Project Structure
 
 - `tests/`: Automated test specifications using Playwright (UI and API).
